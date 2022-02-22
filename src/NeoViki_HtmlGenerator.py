@@ -249,7 +249,7 @@ def BEGIN(page_name, page_title):
     __func_main_body = "\n\tpage = document.getElementById(\"container\");"
     __func_main_tail="\n}\n\nMAIN();"
 
-    __html_head="<!DOCTYPE html>\n<html>\n<title>"+page_title+"</title>\n<body>\n\t<div id=\"container\">\n\t</div>\n\n<script>"
+    __html_head="<!DOCTYPE html>\n\n<!-- Machine Generated Code ( NeoViki_HtmlGenerator ) -->\n\n<html>\n<title>"+page_title+"</title>\n<body>\n\t<div id=\"container\">\n\t</div>\n\n<script>"
     __html_tail="\n\n</script>\n\n</body>\n</html>"
 
 
