@@ -2,6 +2,10 @@
 
     HTML Page generator using Python ( For Quick Prototyping )
 
+# Demo
+
+![](examples/demo.png)
+
 # Completed
 
     - Button
