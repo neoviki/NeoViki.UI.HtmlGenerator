@@ -90,6 +90,18 @@ class UI_COMMON:
         self.code +="\n\tobject.style.textAlign      =" + "\"" + self.align  + "\";"
         self.code +="\n\tobject.style.verticalAlign  =" + "\"" + "middle"  + "\";"
 
+class image(UI_COMMON):
+    def __init__(self):
+        self.code = ""
+
+class video(UI_COMMON):
+    def __init__(self):
+        self.code = ""
+
+class audio(UI_COMMON):
+    def __init__(self):
+        self.code = ""
+
 class input(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
