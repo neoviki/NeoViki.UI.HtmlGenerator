@@ -1,6 +1,6 @@
 import sys
 sys.path.append('../../src')
-from neoviki_html_generator import *
+from NeoViki_HtmlGenerator import *
 
 BEGIN("out.html", "demo")
 

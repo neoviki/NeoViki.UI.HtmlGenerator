@@ -22,7 +22,7 @@ def g_update_callback():
     global callback_id
     global __func_callbacks
     callback_id = callback_id + 1
-    __func_callbacks += "function callback_" + str(callback_id) + "(){ alert(\"callback_" + str(callback_id) + "\"); }"
+    __func_callbacks += "\n\nfunction callback_" + str(callback_id) + "(){\n\t alert(\"callback_" + str(callback_id) + "\"); \n}"
 
 def g_update_main(code):
     global __func_main_body
@@ -86,20 +86,20 @@ class UI_COMMON:
 
     def generate_common(self):
         global callback_id
-        self.code +="object.style.position = \"absolute\";"
-        self.code +="object.style.background = \""  + self.color.bg + "\";"
-        self.code +="object.style.color = \""       + self.color.fg + "\";"
-        self.code +="object.style.width ="          + "\"" + str(self.width)    + "px" + "\";"
-        self.code +="object.style.height ="         + "\"" + str(self.height)   + "px" + "\";"
-        self.code +="object.style.fontSize ="       + "\"" + str(self.font.size)   + "px" + "\";"
-        self.code +="object.style.justifyContent =" + "\"" + self.align  + "\";"
-        self.code +="object.style.textAlign      =" + "\"" + self.align  + "\";"
-        self.code +="object.style.verticalAlign  =" + "\"" + "middle"  + "\";"
+        self.code +="\n\tobject.style.position = \"absolute\";"
+        self.code +="\n\tobject.style.background = \""  + self.color.bg + "\";"
+        self.code +="\n\tobject.style.color = \""       + self.color.fg + "\";"
+        self.code +="\n\tobject.style.width ="          + "\"" + str(self.width)    + "px" + "\";"
+        self.code +="\n\tobject.style.height ="         + "\"" + str(self.height)   + "px" + "\";"
+        self.code +="\n\tobject.style.fontSize ="       + "\"" + str(self.font.size)   + "px" + "\";"
+        self.code +="\n\tobject.style.justifyContent =" + "\"" + self.align  + "\";"
+        self.code +="\n\tobject.style.textAlign      =" + "\"" + self.align  + "\";"
+        self.code +="\n\tobject.style.verticalAlign  =" + "\"" + "middle"  + "\";"
 
 class input(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
-        self.code = "object = document.createElement('INPUT');"
+        self.code = "\n\tobject = document.createElement('INPUT');"
         self.value = get_input_name()
         self.password = False
 
@@ -108,24 +108,24 @@ class input(UI_COMMON):
         self.x = x
         self.y = y
         self.generate_common()
-        self.code +="object.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
-        self.code +="object.style.left =" + "\"" + str(self.x) + "px" + "\";"
-        self.code +="object.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
+        self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
 
         if self.password == False:
-            self.code +="object.setAttribute("  + "\"" + "type" + "\"," + "\"text\");"
+            self.code +="\n\tobject.setAttribute("  + "\"" + "type" + "\"," + "\"text\");"
         else:
-            self.code +="object.setAttribute("  + "\"" + "type" + "\"," + "\"password\");"
+            self.code +="\n\tobject.setAttribute("  + "\"" + "type" + "\"," + "\"password\");"
 
-        self.code +="object.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
-        self.code +="page.appendChild(object);"
+        self.code +="\n\tobject.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
+        self.code +="\n\tpage.appendChild(object);"
         g_update_main(self.code)
 
 
 class checkbox(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
-        self.code = "object = document.createElement('INPUT');"
+        self.code = "\n\tobject = document.createElement('INPUT');"
         self.value = get_checkbox_name()
 
     def gotoxy(self, x, y):
@@ -133,18 +133,18 @@ class checkbox(UI_COMMON):
         self.x = x
         self.y = y
         self.generate_common()
-        self.code +="object.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
-        self.code +="object.style.left =" + "\"" + str(self.x) + "px" + "\";"
-        self.code +="object.style.top ="  + "\"" + str(self.y) + "px" + "\";"
-        self.code +="object.setAttribute("  + "\"" + "type" + "\"," + "\"checkbox\");"
-        self.code +="object.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
-        self.code +="page.appendChild(object);"
+        self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
+        self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="\n\tobject.setAttribute("  + "\"" + "type" + "\"," + "\"checkbox\");"
+        self.code +="\n\tobject.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
+        self.code +="\n\tpage.appendChild(	object);"
         g_update_main(self.code)
 
 class radio(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
-        self.code = "object = document.createElement('INPUT');"
+        self.code = "\n\tobject = document.createElement('INPUT');"
         self.value = get_checkbox_name()
 
     def gotoxy(self, x, y):
@@ -152,18 +152,18 @@ class radio(UI_COMMON):
         self.x = x
         self.y = y
         self.generate_common()
-        self.code +="object.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
-        self.code +="object.style.left =" + "\"" + str(self.x) + "px" + "\";"
-        self.code +="object.style.top ="  + "\"" + str(self.y) + "px" + "\";"
-        self.code +="object.setAttribute("  + "\"" + "type" + "\"," + "\"radio\");"
-        self.code +="object.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
-        self.code +="page.appendChild(object);"
+        self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
+        self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="\n\tobject.setAttribute("  + "\"" + "type" + "\"," + "\"radio\");"
+        self.code +="\n\tobject.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
+        self.code +="\n\tpage.appendChild(object);"
         g_update_main(self.code)
 
 class label(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
-        self.code = "object = document.createElement('LABEL');"
+        self.code = "\n\tobject = document.createElement('LABEL');"
         self.value = get_label_name()
         self.color.bg = 'black'
         self.color.fg = 'white'
@@ -173,10 +173,10 @@ class label(UI_COMMON):
         self.x = x
         self.y = y
         self.generate_common()
-        self.code +="object.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
-        self.code +="object.style.left =" + "\"" + str(self.x) + "px" + "\";"
-        self.code +="object.style.top ="  + "\"" + str(self.y) + "px" + "\";"
-        self.code +="page.appendChild(object);"
+        self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
+        self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="\n\tpage.appendChild(object);"
         g_update_main(self.code)
 
 
@@ -184,14 +184,14 @@ class button(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
         g_update_callback()
-        self.code = "object = document.createElement('BUTTON');"
+        self.code = "\n\tobject = document.createElement('BUTTON');"
         self.value = get_button_name()
         self.color.bg = 'black'
         self.color.fg = 'white'
 
     def set_callback(self):
         __callback__ = "callback_" + str(callback_id)
-        self.code +="object.onclick = " + __callback__ + ";"
+        self.code +="\n\tobject.onclick = " + __callback__ + ";"
 
     def gotoxy(self, x, y):
         global __func_main_body
@@ -199,10 +199,10 @@ class button(UI_COMMON):
         self.y = y
         self.generate_common()
         self.set_callback()
-        self.code +="object.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
-        self.code +="object.style.left =" + "\"" + str(self.x) + "px" + "\";"
-        self.code +="object.style.top =" + "\""  + str(self.y) + "px" + "\";"
-        self.code +="page.appendChild(object);"
+        self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
+        self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="\n\tobject.style.top =" + "\""  + str(self.y) + "px" + "\";"
+        self.code +="\n\tpage.appendChild(object);"
         g_update_main(self.code)
 
 def BEGIN(page_name, page_title):
@@ -245,12 +245,12 @@ def BEGIN(page_name, page_title):
     __func_main_body = ""
     __func_main_tail = ""
 
-    __func_main_head="function MAIN() {"
-    __func_main_body = "page = document.getElementById(\"container\");"
-    __func_main_tail="}MAIN();"
+    __func_main_head="\n\nfunction MAIN() {"
+    __func_main_body = "\n\tpage = document.getElementById(\"container\");"
+    __func_main_tail="\n}\n\nMAIN();"
 
-    __html_head="<!DOCTYPE html><html><title>"+page_title+"</title><body><div id=\"container\"></div><script>"
-    __html_tail="</script></body></html>"
+    __html_head="<!DOCTYPE html>\n<html>\n<title>"+page_title+"</title>\n<body>\n\t<div id=\"container\">\n\t</div>\n\n<script>"
+    __html_tail="\n\n</script>\n\n</body>\n</html>"
 
 
 def END():
