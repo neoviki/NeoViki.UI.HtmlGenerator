@@ -1,3 +1,9 @@
+'''
+    HTML Generator Library ( NeoViki_UI Format )
+
+    Author: Viki (a) Vignesh Natarajan
+'''
+
 class font:
     def __init__(self):
         self.size = 10
