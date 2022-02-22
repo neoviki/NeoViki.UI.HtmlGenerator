@@ -14,6 +14,8 @@ function MAIN() {
 	page = document.getElementById("container");
 	object = document.createElement('INPUT');
 	object.style.position = "absolute";
+	object.id = "1";
+	object.name = "Checkbox_1";
 	object.style.background = "white";
 	object.style.color = "black";
 	object.style.width ="200px";
@@ -22,11 +24,11 @@ function MAIN() {
 	object.style.justifyContent ="center";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
-	object.appendChild(document.createTextNode("CheckBox_1"));
+	object.appendChild(document.createTextNode("Checkbox_1"));
 	object.style.left ="120px";
 	object.style.top ="100px";
 	object.setAttribute("type","checkbox");
-	object.setAttribute("value","CheckBox_1");
+	object.setAttribute("value","Checkbox_1");
 	page.appendChild(	object);
 }
 

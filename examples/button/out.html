@@ -10,14 +10,16 @@
 
 <script>
 
-function callback_1(){
-	 alert("callback_1"); 
+function callback_Button_1(){
+	 alert("callback_Button_1"); 
 }
 
 function MAIN() {
 	page = document.getElementById("container");
 	object = document.createElement('BUTTON');
 	object.style.position = "absolute";
+	object.id = "1";
+	object.name = "Button_1";
 	object.style.background = "black";
 	object.style.color = "white";
 	object.style.width ="200px";
@@ -26,7 +28,7 @@ function MAIN() {
 	object.style.justifyContent ="center";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
-	object.onclick = callback_1;
+	object.onclick = callback_Button_1;
 	object.appendChild(document.createTextNode("Button_1"));
 	object.style.left ="120px";
 	object.style.top ="100px";

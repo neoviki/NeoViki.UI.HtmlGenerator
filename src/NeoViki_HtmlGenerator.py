@@ -1,6 +1,3 @@
-
-callback_id = 0
-
 class font:
     def __init__(self):
         self.size = 10
@@ -18,42 +15,38 @@ class border:
         self.color = 'black'
         self.thickness = 10
 
-def g_update_callback():
-    global callback_id
+def generate_callback(callback_name):
     global __func_callbacks
-    callback_id = callback_id + 1
-    __func_callbacks += "\n\nfunction callback_" + str(callback_id) + "(){\n\t alert(\"callback_" + str(callback_id) + "\"); \n}"
+    __func_callbacks += "\n\nfunction " + callback_name + "(){\n\t alert(\"" + callback_name +  "\"); \n}"
 
-def g_update_main(code):
+def update_main(code):
     global __func_main_body
     __func_main_body += code
 
-def get_button_name():
+def get_button_id():
     global button_id
     button_id += 1
-    return ("Button_" + str(button_id))
+    return button_id
 
-def get_label_name():
+def get_label_id():
     global label_id
     label_id += 1
-    return ("Label_" + str(button_id))
+    return button_id
 
-def get_input_name():
+def get_input_id():
     global input_id
     input_id += 1
-    return ("Input_" + str(input_id))
+    return input_id
 
-def get_radio_name():
+def get_radio_id():
     global radio_id
     radio_id += 1
-    return ("Radio_" + str(radio_id))
+    return radio_id
 
-
-def get_checkbox_name():
+def get_checkbox_id():
     global checkbox_id
     checkbox_id += 1
-    return ("CheckBox_" + str(checkbox_id))
-
+    return checkbox_id
 
 class UI_COMMON:
     def __init__(self):
@@ -85,8 +78,9 @@ class UI_COMMON:
         return
 
     def generate_common(self):
-        global callback_id
         self.code +="\n\tobject.style.position = \"absolute\";"
+        self.code += "\n\tobject.id = " + "\"" + str(self.id) + "\"" + ";"
+        self.code += "\n\tobject.name = " + "\"" + str(self.name) + "\"" + ";"
         self.code +="\n\tobject.style.background = \""  + self.color.bg + "\";"
         self.code +="\n\tobject.style.color = \""       + self.color.fg + "\";"
         self.code +="\n\tobject.style.width ="          + "\"" + str(self.width)    + "px" + "\";"
@@ -99,8 +93,10 @@ class UI_COMMON:
 class input(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
+        self.id = get_input_id()
+        self.name = "Input_" + str(self.id)
+        self.value = self.name
         self.code = "\n\tobject = document.createElement('INPUT');"
-        self.value = get_input_name()
         self.password = False
 
     def gotoxy(self, x, y):
@@ -119,14 +115,16 @@ class input(UI_COMMON):
 
         self.code +="\n\tobject.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
         self.code +="\n\tpage.appendChild(object);"
-        g_update_main(self.code)
+        update_main(self.code)
 
 
 class checkbox(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
+        self.id = get_checkbox_id()
+        self.name = "Checkbox_" + str(self.id)
+        self.value = self.name
         self.code = "\n\tobject = document.createElement('INPUT');"
-        self.value = get_checkbox_name()
 
     def gotoxy(self, x, y):
         global __func_main_body
@@ -139,13 +137,15 @@ class checkbox(UI_COMMON):
         self.code +="\n\tobject.setAttribute("  + "\"" + "type" + "\"," + "\"checkbox\");"
         self.code +="\n\tobject.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
         self.code +="\n\tpage.appendChild(	object);"
-        g_update_main(self.code)
+        update_main(self.code)
 
 class radio(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
+        self.id = get_radio_id()
+        self.name = "Radio_" + str(self.id)
+        self.value = self.name
         self.code = "\n\tobject = document.createElement('INPUT');"
-        self.value = get_checkbox_name()
 
     def gotoxy(self, x, y):
         global __func_main_body
@@ -158,13 +158,15 @@ class radio(UI_COMMON):
         self.code +="\n\tobject.setAttribute("  + "\"" + "type" + "\"," + "\"radio\");"
         self.code +="\n\tobject.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
         self.code +="\n\tpage.appendChild(object);"
-        g_update_main(self.code)
+        update_main(self.code)
 
 class label(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
+        self.id = get_label_id()
+        self.name = "Label_" + str(self.id)
+        self.value = self.name
         self.code = "\n\tobject = document.createElement('LABEL');"
-        self.value = get_label_name()
         self.color.bg = 'black'
         self.color.fg = 'white'
 
@@ -177,21 +179,23 @@ class label(UI_COMMON):
         self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
         self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
         self.code +="\n\tpage.appendChild(object);"
-        g_update_main(self.code)
+        update_main(self.code)
 
 
 class button(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
-        g_update_callback()
+        self.id = get_button_id()
+        self.name = "Button_" + str(self.id)
+        self.value = self.name
+        self.callback_name = "callback_Button_" + str(self.id)
         self.code = "\n\tobject = document.createElement('BUTTON');"
-        self.value = get_button_name()
         self.color.bg = 'black'
         self.color.fg = 'white'
 
     def set_callback(self):
-        __callback__ = "callback_" + str(callback_id)
-        self.code +="\n\tobject.onclick = " + __callback__ + ";"
+        self.code +="\n\tobject.onclick = " + self.callback_name + ";"
+        generate_callback(self.callback_name)
 
     def gotoxy(self, x, y):
         global __func_main_body
@@ -203,11 +207,10 @@ class button(UI_COMMON):
         self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
         self.code +="\n\tobject.style.top =" + "\""  + str(self.y) + "px" + "\";"
         self.code +="\n\tpage.appendChild(object);"
-        g_update_main(self.code)
+        update_main(self.code)
 
 def BEGIN(page_name, page_title):
     global __func_callbacks
-    global callback_id
     global button_id
     global text_id
     global paragraph_id
@@ -230,7 +233,6 @@ def BEGIN(page_name, page_title):
 
     __func_callbacks = ""
     __file_name = page_name
-    callback_id = 0
     button_id = 0
     text_id = 0
     paragraph_id = 0
