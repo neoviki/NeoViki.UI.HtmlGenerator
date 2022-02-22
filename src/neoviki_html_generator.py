@@ -43,6 +43,18 @@ def get_input_name():
     input_id += 1
     return ("Input_" + str(input_id))
 
+def get_radio_name():
+    global radio_id
+    radio_id += 1
+    return ("Radio_" + str(radio_id))
+
+
+def get_checkbox_name():
+    global checkbox_id
+    checkbox_id += 1
+    return ("CheckBox_" + str(checkbox_id))
+
+
 class UI_COMMON:
     def __init__(self):
         self.title  = "demo"
@@ -110,6 +122,43 @@ class input(UI_COMMON):
         g_update_main(self.code)
 
 
+class checkbox(UI_COMMON):
+    def __init__(self):
+        UI_COMMON.__init__(self)
+        self.code = "object = document.createElement('INPUT');"
+        self.value = get_checkbox_name()
+
+    def gotoxy(self, x, y):
+        global __func_main_body
+        self.x = x
+        self.y = y
+        self.generate_common()
+        self.code +="object.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
+        self.code +="object.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="object.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="object.setAttribute("  + "\"" + "type" + "\"," + "\"checkbox\");"
+        self.code +="object.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
+        self.code +="page.appendChild(object);"
+        g_update_main(self.code)
+
+class radio(UI_COMMON):
+    def __init__(self):
+        UI_COMMON.__init__(self)
+        self.code = "object = document.createElement('INPUT');"
+        self.value = get_checkbox_name()
+
+    def gotoxy(self, x, y):
+        global __func_main_body
+        self.x = x
+        self.y = y
+        self.generate_common()
+        self.code +="object.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
+        self.code +="object.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="object.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="object.setAttribute("  + "\"" + "type" + "\"," + "\"radio\");"
+        self.code +="object.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
+        self.code +="page.appendChild(object);"
+        g_update_main(self.code)
 
 class label(UI_COMMON):
     def __init__(self):

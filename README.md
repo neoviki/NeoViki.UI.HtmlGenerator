@@ -7,13 +7,14 @@
     - Button
     - Input
     - Label
+    - Radio Button
+    - Checkbox
 
 # Pending 
 
     - Scrollbar
-    - Radio Button
-    - Checkbox
     - Logo ( Image Insertion )  
+    - Video 
 
 # Bugs
 
