@@ -44,6 +44,17 @@ def get_input_id():
     input_id += 1
     return input_id
 
+def get_paragraph_id():
+    global paragraph_id
+    paragraph_id += 1
+    return paragraph_id
+
+
+def get_video_id():
+    global video_id
+    video_id += 1
+    return video_id
+
 def get_radio_id():
     global radio_id
     radio_id += 1
@@ -64,7 +75,7 @@ class UI_COMMON:
         self.height = 200
         self.value = "Object"
         self.code = ""
-        #"left", "right", "center"
+        #"left", "right", "center", "justify"
         self.align = "center"
 
     def dimension(self, width, height):
@@ -85,14 +96,18 @@ class UI_COMMON:
 
     def generate_common(self):
         self.code +="\n\tobject.style.position = \"absolute\";"
-        self.code += "\n\tobject.id = " + "\"" + str(self.id) + "\"" + ";"
+        #self.code += "\n\tobject.id = " + "\"" + str(self.id) + "\"" + ";"
         self.code += "\n\tobject.name = " + "\"" + str(self.name) + "\"" + ";"
         self.code +="\n\tobject.style.background = \""  + self.color.bg + "\";"
         self.code +="\n\tobject.style.color = \""       + self.color.fg + "\";"
         self.code +="\n\tobject.style.width ="          + "\"" + str(self.width)    + "px" + "\";"
         self.code +="\n\tobject.style.height ="         + "\"" + str(self.height)   + "px" + "\";"
         self.code +="\n\tobject.style.fontSize ="       + "\"" + str(self.font.size)   + "px" + "\";"
-        self.code +="\n\tobject.style.justifyContent =" + "\"" + self.align  + "\";"
+
+        if self.font.bold == True:
+            self.code +="\n\tobject.style.fontWeight = \""  + "bold" + "\";"
+
+        #self.code +="\n\tobject.style.justifyContent =" + "\"" + self.align  + "\";"
         self.code +="\n\tobject.style.textAlign      =" + "\"" + self.align  + "\";"
         self.code +="\n\tobject.style.verticalAlign  =" + "\"" + "middle"  + "\";"
 
@@ -100,9 +115,53 @@ class image(UI_COMMON):
     def __init__(self):
         self.code = ""
 
+class paragraph(UI_COMMON):
+    def __init__(self):
+        UI_COMMON.__init__(self)
+        self.id = get_paragraph_id()
+        self.name = "Paragraph_" + str(self.id)
+        self.value = self.name
+        self.code = "\n\tobject = document.createElement('P');"
+
+    def gotoxy(self, x, y):
+        self.x = x
+        self.y = y
+        self.generate_common()
+        self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="\n\tobject.innerHTML =  " + "\"" + self.value + "\"" + ";"
+        self.code +="\n\tpage.appendChild(object);"
+        update_main(self.code)
+
+
 class video(UI_COMMON):
     def __init__(self):
-        self.code = ""
+        UI_COMMON.__init__(self)
+        self.id = get_video_id()
+        self.name = "Video_" + str(self.id)
+        self.value = self.name
+        self.code = "\n\tobject = document.createElement('VIDEO');"
+        self.autoplay = False
+        self.src = "test.ogg"
+
+    def gotoxy(self, x, y):
+        self.x = x
+        self.y = y
+        self.generate_common()
+
+        self.code +="\n\tobject.src =" + "\"" + str(self.src) + "\";"
+
+        if self.autoplay == True:
+            self.code +="\n\tobject.autoplay =" + "true" + ";"
+        else:
+            self.code +="\n\tobject.setAttribute(\"controls\", \"controls\");"
+
+        self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
+        self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="\n\tobject.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
+        self.code +="\n\tpage.appendChild(object);"
+        update_main(self.code)
 
 class audio(UI_COMMON):
     def __init__(self):
@@ -118,7 +177,6 @@ class input(UI_COMMON):
         self.password = False
 
     def gotoxy(self, x, y):
-        global __func_main_body
         self.x = x
         self.y = y
         self.generate_common()
@@ -145,7 +203,6 @@ class checkbox(UI_COMMON):
         self.code = "\n\tobject = document.createElement('INPUT');"
 
     def gotoxy(self, x, y):
-        global __func_main_body
         self.x = x
         self.y = y
         self.generate_common()
@@ -166,7 +223,6 @@ class radio(UI_COMMON):
         self.code = "\n\tobject = document.createElement('INPUT');"
 
     def gotoxy(self, x, y):
-        global __func_main_body
         self.x = x
         self.y = y
         self.generate_common()
@@ -189,7 +245,6 @@ class label(UI_COMMON):
         self.color.fg = 'white'
 
     def gotoxy(self, x, y):
-        global __func_main_body
         self.x = x
         self.y = y
         self.generate_common()
@@ -216,7 +271,6 @@ class button(UI_COMMON):
         generate_callback(self.callback_name)
 
     def gotoxy(self, x, y):
-        global __func_main_body
         self.x = x
         self.y = y
         self.generate_common()
@@ -237,6 +291,8 @@ def BEGIN(page_name, page_title):
     global scrollbar_id
     global label_id
     global input_id
+    global video_id
+    global paragraph_id
     global __html_head
     global __html_body
     global __html_tail
@@ -244,7 +300,6 @@ def BEGIN(page_name, page_title):
     global __func_main_body
     global __func_main_tail
     global __func_main_head
-    global __func_main_body
     global __func_main_tail
     global __html_head
     global __html_tail
@@ -259,6 +314,8 @@ def BEGIN(page_name, page_title):
     scrollbar_id = 0
     label_id = 0
     input_id = 0
+    video_id = 0
+    paragraph_id = 0
     __html_head = ""
     __html_body = ""
     __html_tail = ""
