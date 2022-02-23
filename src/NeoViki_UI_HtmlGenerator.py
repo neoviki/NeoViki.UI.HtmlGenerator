@@ -59,6 +59,11 @@ def get_image_id():
     image_id += 1
     return image_id
 
+def get_audio_id():
+    global audio_id
+    audio_id += 1
+    return audio_id
+
 def get_video_id():
     global video_id
     video_id += 1
@@ -113,7 +118,9 @@ class UI_COMMON:
         self.code +="\n\tobject.style.width ="          + "\"" + str(self.width)    + "px" + "\";"
         self.code +="\n\tobject.style.height ="         + "\"" + str(self.height)   + "px" + "\";"
         self.code +="\n\tobject.style.fontSize ="       + "\"" + str(self.font.size)   + "px" + "\";"
-        self.code +="\n\tobject.style.borderRadius ="       + "\"" + str(self.radius)   + "px" + "\";"
+
+        if self.radius !=0 :
+            self.code +="\n\tobject.style.borderRadius ="       + "\"" + str(self.radius)   + "px" + "\";"
 
         if self.border.thickness != 0:
             self.code +="\n\tobject.style.borderWidth = \""  + str(self.border.thickness) + "px" + "\";"
@@ -192,6 +199,36 @@ class text(UI_COMMON):
         self.code +="\n\tpage.appendChild(object);"
         update_main(self.code)
 
+class audio(UI_COMMON):
+    def __init__(self):
+        UI_COMMON.__init__(self)
+        self.id = get_audio_id()
+        self.name = "Audio_" + str(self.id)
+        self.value = self.name
+        self.code = "\n\tobject = document.createElement('AUDIO');"
+        self.autoplay = False
+        self.src = "test.mp3"
+
+    def gotoxy(self, x, y):
+        self.x = x
+        self.y = y
+        self.generate()
+
+        self.code +="\n\tobject.src =" + "\"" + str(self.src) + "\";"
+
+        if self.autoplay == True:
+            self.code +="\n\tobject.autoplay =" + "true" + ";"
+        else:
+            self.code +="\n\tobject.setAttribute(\"controls\", \"controls\");"
+
+        self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
+        self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="\n\tobject.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
+        self.code +="\n\tpage.appendChild(object);"
+        update_main(self.code)
+
+
 class video(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
@@ -220,10 +257,6 @@ class video(UI_COMMON):
         self.code +="\n\tobject.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
         self.code +="\n\tpage.appendChild(object);"
         update_main(self.code)
-
-class audio(UI_COMMON):
-    def __init__(self):
-        self.code = ""
 
 class input(UI_COMMON):
     def __init__(self):
@@ -356,15 +389,25 @@ class PAGE(UI_COMMON):
         self.head = ""
         self.tail = ""
         self.body = ""
+        self.bg_image = ""
         self.generate()
 
     def generate(self):
-        self.head = "<!DOCTYPE html>\n\n<!-- Machine Generated Code ( NeoViki_HtmlGenerator ) -->\n\n<html>\n<title>"+self.title+"</title>\n<body>\n\t<div id=\"container\">\n\t</div>\n\n<script>"
-        self.tail="\n\n</script>\n\n</body>\n</html>"
+
+        tag1 = "\n\tbackground: " + self.color.bg + ";"
+        tag2 = ""
+        if self.bg_image != "":
+            tag2 = "\n\tbackground-image: url(" + "\'" + self.bg_image + "\'" + ");"
+
+        self.style = "\n<style>\n\tbody \n{" + tag1 + tag2 + "\n}\n</style>"
+        new_title = "\n<title>"+self.title+"</title>\n</head><body>\n\t<div id=\"container\">\n\t</div>\n\n<script>"
+
+        self.head = "<!DOCTYPE html>\n\n<!-- Machine Generated Code ( NeoViki_HtmlGenerator ) -->\n\n<html>\n<head>" + self.style + new_title
+        self.tail = "\n\n</script>\n\n</body>\n</html>"
 
 
 
-def BEGIN(page_name, page_title):
+def BEGIN(page_name):
     global __func_callbacks
     global button_id
     global text_id
@@ -374,6 +417,7 @@ def BEGIN(page_name, page_title):
     global label_id
     global input_id
     global video_id
+    global audio_id
     global image_id
     global paragraph_id
     global __file_name
@@ -394,6 +438,7 @@ def BEGIN(page_name, page_title):
     label_id = 0
     input_id = 0
     video_id = 0
+    audio_id = 0
     image_id = 0
     paragraph_id = 0
     __func_main_body = ""

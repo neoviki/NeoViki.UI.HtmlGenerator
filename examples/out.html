@@ -3,8 +3,16 @@
 <!-- Machine Generated Code ( NeoViki_HtmlGenerator ) -->
 
 <html>
-<title></title>
-<body>
+<head>
+<style>
+	body 
+{
+	background: grey;
+	background-image: url('test.png');
+}
+</style>
+<title>test</title>
+</head><body>
 	<div id="container">
 	</div>
 
@@ -28,7 +36,6 @@ function MAIN() {
 	object.style.width ="82px";
 	object.style.height ="17px";
 	object.style.fontSize ="14px";
-	object.style.borderRadius ="0px";
 	object.style.borderWidth = "4px";
 	object.style.borderColor = "black";
 	object.style.borderStyle = "solid";
@@ -66,7 +73,6 @@ function MAIN() {
 	object.style.width ="200px";
 	object.style.height ="50px";
 	object.style.fontSize ="10px";
-	object.style.borderRadius ="0px";
 	object.style.fontFamily = "consolas";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
@@ -221,8 +227,8 @@ function MAIN() {
 	object.name = "Image_1";
 	object.style.background = "white";
 	object.style.color = "black";
-	object.style.width ="400px";
-	object.style.height ="240px";
+	object.style.width ="200px";
+	object.style.height ="110px";
 	object.style.fontSize ="10px";
 	object.style.borderRadius ="7px";
 	object.style.fontFamily = "consolas";
@@ -233,6 +239,24 @@ function MAIN() {
 	object.style.left ="100px";
 	object.style.top ="500px";
 	object.setAttribute("value","Demo Image");
+	page.appendChild(object);
+	object = document.createElement('AUDIO');
+	object.style.position = "absolute";
+	object.name = "Audio_1";
+	object.style.background = "none";
+	object.style.color = "black";
+	object.style.width ="250px";
+	object.style.height ="100px";
+	object.style.fontSize ="10px";
+	object.style.fontFamily = "consolas";
+	object.style.textAlign      ="center";
+	object.style.verticalAlign  ="middle";
+	object.src ="test.mp3";
+	object.setAttribute("controls", "controls");
+	object.appendChild(document.createTextNode("Demo Audio"));
+	object.style.left ="350px";
+	object.style.top ="500px";
+	object.setAttribute("value","Demo Audio");
 	page.appendChild(object);
 	object = document.createElement('VIDEO');
 	object.style.position = "absolute";

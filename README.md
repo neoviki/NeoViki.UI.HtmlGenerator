@@ -14,15 +14,14 @@
     - Radio Button
     - Checkbox
     - Video 
+    - Image
 
 ## Pending 
 
     - Scrollbar
-    - Logo ( Image Insertion )  
 
 ## Bugs
 
-    - Label ( Text is not aligned to center )
 
 ## Note
 

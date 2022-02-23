@@ -2,7 +2,10 @@ import sys
 sys.path.append('../src')
 from NeoViki_UI_HtmlGenerator import *
 
-BEGIN("out.html", "demo")
+page = BEGIN("out.html")
+page.color.bg = 'grey'
+page.bg_image = "test.png"
+page.title = "test"
 
 obj = text()
 obj.value = "Hello!!"
@@ -67,10 +70,18 @@ obj.gotoxy(400, 400)
 obj = image()
 obj.value = "Demo Image"
 obj.src = "test.png"
-obj.width = 400
-obj.height = 240
+obj.width = 200
+obj.height = 110
 obj.gotoxy(100, 500)
 
+obj = audio()
+obj.color.bg = "none"
+obj.radius = 0
+obj.src = "test.mp3"
+obj.value = "Demo Audio"
+obj.width = 250
+obj.height = 100
+obj.gotoxy(350, 500)
 
 
 obj = video()
