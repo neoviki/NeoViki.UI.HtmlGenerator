@@ -15,10 +15,13 @@
     - Checkbox
     - Video 
     - Image
+    - Audio
 
 ## Pending 
-
+    
     - Scrollbar
+    - File Object ( Local File Link + Thumbnail Image )
+    - Url Object ( Remote Link + Thumbnail Image )
 
 ## Bugs
 
