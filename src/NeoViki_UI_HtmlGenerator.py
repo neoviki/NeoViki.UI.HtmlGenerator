@@ -19,7 +19,7 @@ class color:
 class border:
     def __init__(self):
         self.color = 'black'
-        self.thickness = 10
+        self.thickness = 0
 
 def generate_callback(callback_name):
     global __func_callbacks
@@ -104,8 +104,19 @@ class UI_COMMON:
         self.code +="\n\tobject.style.height ="         + "\"" + str(self.height)   + "px" + "\";"
         self.code +="\n\tobject.style.fontSize ="       + "\"" + str(self.font.size)   + "px" + "\";"
 
+        if self.border.thickness != 0:
+            self.code +="\n\tobject.style.borderWidth = \""  + str(self.border.thickness) + "px" + "\";"
+            self.code +="\n\tobject.style.borderColor = \""  + self.border.color + "\";"
+            self.code +="\n\tobject.style.borderStyle = \""  + "solid" + "\";"
+
         if self.font.bold == True:
             self.code +="\n\tobject.style.fontWeight = \""  + "bold" + "\";"
+
+        if self.font.italic == True:
+            self.code +="\n\tobject.style.fontStyle = \""  + "italic" + "\";"
+
+        if self.font.name != "":
+            self.code +="\n\tobject.style.fontFamily = \""  + self.font.name + "\";"
 
         #self.code +="\n\tobject.style.justifyContent =" + "\"" + self.align  + "\";"
         self.code +="\n\tobject.style.textAlign      =" + "\"" + self.align  + "\";"
