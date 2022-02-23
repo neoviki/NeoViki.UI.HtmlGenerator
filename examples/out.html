@@ -20,6 +20,25 @@ function callback_Button_2(){
 
 function MAIN() {
 	page = document.getElementById("container");
+	object = document.createElement('DIV');
+	object.style.position = "absolute";
+	object.name = "Text_1";
+	object.style.background = "white";
+	object.style.color = "black";
+	object.style.width ="82px";
+	object.style.height ="17px";
+	object.style.fontSize ="14px";
+	object.style.borderWidth = "4px";
+	object.style.borderColor = "black";
+	object.style.borderStyle = "solid";
+	object.style.fontWeight = "bold";
+	object.style.fontFamily = "Courier New";
+	object.style.textAlign      ="center";
+	object.style.verticalAlign  ="middle";
+	object.style.left ="300px";
+	object.style.top ="50px";
+	object.innerHTML =  "Hello!!";
+	page.appendChild(object);
 	object = document.createElement('INPUT');
 	object.style.position = "absolute";
 	object.name = "Input_1";

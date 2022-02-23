@@ -49,6 +49,11 @@ def get_paragraph_id():
     paragraph_id += 1
     return paragraph_id
 
+def get_text_id():
+    global text_id
+    text_id += 1
+    return text_id
+
 
 def get_video_id():
     global video_id
@@ -144,6 +149,23 @@ class paragraph(UI_COMMON):
         self.code +="\n\tpage.appendChild(object);"
         update_main(self.code)
 
+class text(UI_COMMON):
+    def __init__(self):
+        UI_COMMON.__init__(self)
+        self.id = get_text_id()
+        self.name = "Text_" + str(self.id)
+        self.value = self.name
+        self.code = "\n\tobject = document.createElement('DIV');"
+
+    def gotoxy(self, x, y):
+        self.x = x
+        self.y = y
+        self.generate_common()
+        self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="\n\tobject.innerHTML =  " + "\"" + self.value + "\"" + ";"
+        self.code +="\n\tpage.appendChild(object);"
+        update_main(self.code)
 
 class video(UI_COMMON):
     def __init__(self):
@@ -296,7 +318,6 @@ def BEGIN(page_name, page_title):
     global __func_callbacks
     global button_id
     global text_id
-    global paragraph_id
     global radio_id
     global checkbox_id
     global scrollbar_id

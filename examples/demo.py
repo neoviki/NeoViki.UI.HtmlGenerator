@@ -4,6 +4,17 @@ from NeoViki_UI_HtmlGenerator import *
 
 BEGIN("out.html", "demo")
 
+obj = text()
+obj.value = "Hello!!"
+obj.font.bold = True;
+obj.font.name = "Courier New";
+obj.font.size = 14;
+obj.width = 82
+obj.height = 17
+obj.border.thickness = 4
+obj.gotoxy(300, 50)
+
+
 obj = input()
 obj.value = "Enter Your Input"
 obj.width = 200
