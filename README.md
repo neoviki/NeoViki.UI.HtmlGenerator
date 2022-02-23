@@ -1,25 +1,33 @@
-# python_html_generator
+## python_html_generator
 
     HTML Page generator using Python ( For Quick Prototyping )
 
-# Demo
+## Demo
 
 ![](examples/demo.png)
 
-# Completed
+## Completed
 
     - Button
     - Input
     - Label
     - Radio Button
     - Checkbox
+    - Video 
 
-# Pending 
+## Pending 
 
     - Scrollbar
     - Logo ( Image Insertion )  
-    - Video 
 
-# Bugs
+## Bugs
 
     - Label ( Text is not aligned to center )
+
+## Note
+
+    This is a simple html page generator for quick prototyping and demo. Complex pages cannot be generated with this library. 
+
+    Example: We can add html objects only in a linear manner, nesting objects is not possible with this library.
+
+

@@ -54,6 +54,10 @@ def get_text_id():
     text_id += 1
     return text_id
 
+def get_image_id():
+    global image_id
+    image_id += 1
+    return image_id
 
 def get_video_id():
     global video_id
@@ -75,6 +79,7 @@ class UI_COMMON:
         self.title  = "demo"
         self.color  = color()
         self.border = border()
+        self.radius =  7;
         self.font   = font()
         self.width  = 200
         self.height = 200
@@ -99,7 +104,7 @@ class UI_COMMON:
     def read(self):
         return
 
-    def generate_common(self):
+    def generate(self):
         self.code +="\n\tobject.style.position = \"absolute\";"
         #self.code += "\n\tobject.id = " + "\"" + str(self.id) + "\"" + ";"
         self.code += "\n\tobject.name = " + "\"" + str(self.name) + "\"" + ";"
@@ -108,6 +113,7 @@ class UI_COMMON:
         self.code +="\n\tobject.style.width ="          + "\"" + str(self.width)    + "px" + "\";"
         self.code +="\n\tobject.style.height ="         + "\"" + str(self.height)   + "px" + "\";"
         self.code +="\n\tobject.style.fontSize ="       + "\"" + str(self.font.size)   + "px" + "\";"
+        self.code +="\n\tobject.style.borderRadius ="       + "\"" + str(self.radius)   + "px" + "\";"
 
         if self.border.thickness != 0:
             self.code +="\n\tobject.style.borderWidth = \""  + str(self.border.thickness) + "px" + "\";"
@@ -129,7 +135,26 @@ class UI_COMMON:
 
 class image(UI_COMMON):
     def __init__(self):
-        self.code = ""
+        UI_COMMON.__init__(self)
+        self.id = get_image_id()
+        self.name = "Image_" + str(self.id)
+        self.value = self.name
+        self.code = "\n\tobject = document.createElement('IMG');"
+        self.src = "test.png"
+
+    def gotoxy(self, x, y):
+        self.x = x
+        self.y = y
+        self.generate()
+
+        self.code +="\n\tobject.src =" + "\"" + str(self.src) + "\";"
+        self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
+        self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
+        self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="\n\tobject.setAttribute("  + "\"" + "value" + "\"," + "\"" + self.value + "\");"
+        self.code +="\n\tpage.appendChild(object);"
+        update_main(self.code)
+
 
 class paragraph(UI_COMMON):
     def __init__(self):
@@ -142,7 +167,7 @@ class paragraph(UI_COMMON):
     def gotoxy(self, x, y):
         self.x = x
         self.y = y
-        self.generate_common()
+        self.generate()
         self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
         self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
         self.code +="\n\tobject.innerHTML =  " + "\"" + self.value + "\"" + ";"
@@ -160,7 +185,7 @@ class text(UI_COMMON):
     def gotoxy(self, x, y):
         self.x = x
         self.y = y
-        self.generate_common()
+        self.generate()
         self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
         self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
         self.code +="\n\tobject.innerHTML =  " + "\"" + self.value + "\"" + ";"
@@ -180,7 +205,7 @@ class video(UI_COMMON):
     def gotoxy(self, x, y):
         self.x = x
         self.y = y
-        self.generate_common()
+        self.generate()
 
         self.code +="\n\tobject.src =" + "\"" + str(self.src) + "\";"
 
@@ -212,7 +237,7 @@ class input(UI_COMMON):
     def gotoxy(self, x, y):
         self.x = x
         self.y = y
-        self.generate_common()
+        self.generate()
         self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
         self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
         self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
@@ -233,12 +258,14 @@ class checkbox(UI_COMMON):
         self.id = get_checkbox_id()
         self.name = "Checkbox_" + str(self.id)
         self.value = self.name
+        self.width = 15
+        self.height = 15
         self.code = "\n\tobject = document.createElement('INPUT');"
 
     def gotoxy(self, x, y):
         self.x = x
         self.y = y
-        self.generate_common()
+        self.generate()
         self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
         self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
         self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
@@ -251,6 +278,8 @@ class radio(UI_COMMON):
     def __init__(self):
         UI_COMMON.__init__(self)
         self.id = get_radio_id()
+        self.width = 15
+        self.height =15
         self.name = "Radio_" + str(self.id)
         self.value = self.name
         self.code = "\n\tobject = document.createElement('INPUT');"
@@ -258,7 +287,7 @@ class radio(UI_COMMON):
     def gotoxy(self, x, y):
         self.x = x
         self.y = y
-        self.generate_common()
+        self.generate()
         self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
         self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
         self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
@@ -273,17 +302,20 @@ class label(UI_COMMON):
         self.id = get_label_id()
         self.name = "Label_" + str(self.id)
         self.value = self.name
-        self.code = "\n\tobject = document.createElement('LABEL');"
+        #self.code = "\n\tobject = document.createElement('LABEL');"
+        #Using disabled button as label, as label text is not aligning to the middle
+        self.code = "\n\tobject = document.createElement('BUTTON');"
         self.color.bg = 'black'
         self.color.fg = 'white'
 
     def gotoxy(self, x, y):
         self.x = x
         self.y = y
-        self.generate_common()
+        self.generate()
         self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
         self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
         self.code +="\n\tobject.style.top ="  + "\"" + str(self.y) + "px" + "\";"
+        self.code +="\n\tobject.disabled ="  + "\"" + "true" + "\";"
         self.code +="\n\tpage.appendChild(object);"
         update_main(self.code)
 
@@ -306,13 +338,31 @@ class button(UI_COMMON):
     def gotoxy(self, x, y):
         self.x = x
         self.y = y
-        self.generate_common()
+        self.generate()
         self.set_callback()
         self.code +="\n\tobject.appendChild(document.createTextNode(" + "\"" + str(self.value) + "\"" + "));"
         self.code +="\n\tobject.style.left =" + "\"" + str(self.x) + "px" + "\";"
         self.code +="\n\tobject.style.top =" + "\""  + str(self.y) + "px" + "\";"
         self.code +="\n\tpage.appendChild(object);"
         update_main(self.code)
+
+class PAGE(UI_COMMON):
+    def __init__(self):
+        UI_COMMON.__init__(self)
+        self.id = 0
+        self.name = "Page_" + str(self.id)
+        self.value = self.name
+        self.title = ""
+        self.head = ""
+        self.tail = ""
+        self.body = ""
+        self.generate()
+
+    def generate(self):
+        self.head = "<!DOCTYPE html>\n\n<!-- Machine Generated Code ( NeoViki_HtmlGenerator ) -->\n\n<html>\n<title>"+self.title+"</title>\n<body>\n\t<div id=\"container\">\n\t</div>\n\n<script>"
+        self.tail="\n\n</script>\n\n</body>\n</html>"
+
+
 
 def BEGIN(page_name, page_title):
     global __func_callbacks
@@ -324,17 +374,14 @@ def BEGIN(page_name, page_title):
     global label_id
     global input_id
     global video_id
+    global image_id
     global paragraph_id
-    global __html_head
-    global __html_body
-    global __html_tail
     global __file_name
     global __func_main_body
     global __func_main_tail
     global __func_main_head
     global __func_main_tail
-    global __html_head
-    global __html_tail
+    global page
 
     __func_callbacks = ""
     __file_name = page_name
@@ -347,10 +394,8 @@ def BEGIN(page_name, page_title):
     label_id = 0
     input_id = 0
     video_id = 0
+    image_id = 0
     paragraph_id = 0
-    __html_head = ""
-    __html_body = ""
-    __html_tail = ""
     __func_main_body = ""
     __func_main_tail = ""
 
@@ -358,17 +403,17 @@ def BEGIN(page_name, page_title):
     __func_main_body = "\n\tpage = document.getElementById(\"container\");"
     __func_main_tail="\n}\n\nMAIN();"
 
-    __html_head="<!DOCTYPE html>\n\n<!-- Machine Generated Code ( NeoViki_HtmlGenerator ) -->\n\n<html>\n<title>"+page_title+"</title>\n<body>\n\t<div id=\"container\">\n\t</div>\n\n<script>"
-    __html_tail="\n\n</script>\n\n</body>\n</html>"
 
+    page = PAGE()
+    return page
 
 def END():
-    global __html_head, __html_body, __html_tail
+    global page
     global __file_name, __func_callbacks, __func_main_head, __func_main_body, __func_main_tail
 
-    __html_body=__func_callbacks + __func_main_head + __func_main_body + __func_main_tail
-
-    html_data=__html_head +  __html_body  + __html_tail
+    page.body =__func_callbacks + __func_main_head + __func_main_body + __func_main_tail
+    page.generate()
+    html_data=page.head +  page.body  + page.tail
     f = open(__file_name, "w")
     f.write(html_data)
     f.close()

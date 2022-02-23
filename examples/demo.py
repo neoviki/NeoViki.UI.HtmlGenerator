@@ -12,6 +12,7 @@ obj.font.size = 14;
 obj.width = 82
 obj.height = 17
 obj.border.thickness = 4
+obj.radius = 0
 obj.gotoxy(300, 50)
 
 
@@ -25,6 +26,7 @@ obj = button()
 obj.value = "Update Input"
 obj.width = 200
 obj.height = 50
+obj.radius = 0
 obj.gotoxy(350, 100)
 
 obj = input()
@@ -47,9 +49,9 @@ obj.height = 50
 obj.gotoxy(100, 300)
 
 obj = checkbox()
-obj.width = 200
-obj.height = 50
 obj.gotoxy(350, 300)
+obj = checkbox()
+obj.gotoxy(400, 300)
 
 obj = label()
 obj.value = "Radio Label"
@@ -58,12 +60,21 @@ obj.height = 50
 obj.gotoxy(100, 400)
 
 obj = radio()
-obj.value = "radio"
-obj.width = 200
-obj.height = 50
 obj.gotoxy(350, 400)
+obj = radio()
+obj.gotoxy(400, 400)
+
+obj = image()
+obj.value = "Demo Image"
+obj.src = "test.png"
+obj.width = 400
+obj.height = 240
+obj.gotoxy(100, 500)
+
+
 
 obj = video()
+obj.src = "test.mp4"
 obj.value = "Demo Video"
 obj.width = 400
 obj.height = 240

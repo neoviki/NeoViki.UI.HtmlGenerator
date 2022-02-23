@@ -3,7 +3,7 @@
 <!-- Machine Generated Code ( NeoViki_HtmlGenerator ) -->
 
 <html>
-<title>demo</title>
+<title></title>
 <body>
 	<div id="container">
 	</div>
@@ -28,6 +28,7 @@ function MAIN() {
 	object.style.width ="82px";
 	object.style.height ="17px";
 	object.style.fontSize ="14px";
+	object.style.borderRadius ="0px";
 	object.style.borderWidth = "4px";
 	object.style.borderColor = "black";
 	object.style.borderStyle = "solid";
@@ -47,6 +48,7 @@ function MAIN() {
 	object.style.width ="200px";
 	object.style.height ="50px";
 	object.style.fontSize ="10px";
+	object.style.borderRadius ="7px";
 	object.style.fontFamily = "consolas";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
@@ -64,6 +66,7 @@ function MAIN() {
 	object.style.width ="200px";
 	object.style.height ="50px";
 	object.style.fontSize ="10px";
+	object.style.borderRadius ="0px";
 	object.style.fontFamily = "consolas";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
@@ -80,6 +83,7 @@ function MAIN() {
 	object.style.width ="200px";
 	object.style.height ="50px";
 	object.style.fontSize ="10px";
+	object.style.borderRadius ="7px";
 	object.style.fontFamily = "consolas";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
@@ -97,6 +101,7 @@ function MAIN() {
 	object.style.width ="200px";
 	object.style.height ="50px";
 	object.style.fontSize ="10px";
+	object.style.borderRadius ="7px";
 	object.style.fontFamily = "consolas";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
@@ -105,7 +110,7 @@ function MAIN() {
 	object.style.left ="350px";
 	object.style.top ="200px";
 	page.appendChild(object);
-	object = document.createElement('LABEL');
+	object = document.createElement('BUTTON');
 	object.style.position = "absolute";
 	object.name = "Label_2";
 	object.style.background = "black";
@@ -113,21 +118,24 @@ function MAIN() {
 	object.style.width ="200px";
 	object.style.height ="50px";
 	object.style.fontSize ="10px";
+	object.style.borderRadius ="7px";
 	object.style.fontFamily = "consolas";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
 	object.appendChild(document.createTextNode("CheckBox Label"));
 	object.style.left ="100px";
 	object.style.top ="300px";
+	object.disabled ="true";
 	page.appendChild(object);
 	object = document.createElement('INPUT');
 	object.style.position = "absolute";
 	object.name = "Checkbox_1";
 	object.style.background = "white";
 	object.style.color = "black";
-	object.style.width ="200px";
-	object.style.height ="50px";
+	object.style.width ="15px";
+	object.style.height ="15px";
 	object.style.fontSize ="10px";
+	object.style.borderRadius ="7px";
 	object.style.fontFamily = "consolas";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
@@ -137,7 +145,25 @@ function MAIN() {
 	object.setAttribute("type","checkbox");
 	object.setAttribute("value","Checkbox_1");
 	page.appendChild(	object);
-	object = document.createElement('LABEL');
+	object = document.createElement('INPUT');
+	object.style.position = "absolute";
+	object.name = "Checkbox_2";
+	object.style.background = "white";
+	object.style.color = "black";
+	object.style.width ="15px";
+	object.style.height ="15px";
+	object.style.fontSize ="10px";
+	object.style.borderRadius ="7px";
+	object.style.fontFamily = "consolas";
+	object.style.textAlign      ="center";
+	object.style.verticalAlign  ="middle";
+	object.appendChild(document.createTextNode("Checkbox_2"));
+	object.style.left ="400px";
+	object.style.top ="300px";
+	object.setAttribute("type","checkbox");
+	object.setAttribute("value","Checkbox_2");
+	page.appendChild(	object);
+	object = document.createElement('BUTTON');
 	object.style.position = "absolute";
 	object.name = "Label_2";
 	object.style.background = "black";
@@ -145,29 +171,68 @@ function MAIN() {
 	object.style.width ="200px";
 	object.style.height ="50px";
 	object.style.fontSize ="10px";
+	object.style.borderRadius ="7px";
 	object.style.fontFamily = "consolas";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
 	object.appendChild(document.createTextNode("Radio Label"));
 	object.style.left ="100px";
 	object.style.top ="400px";
+	object.disabled ="true";
 	page.appendChild(object);
 	object = document.createElement('INPUT');
 	object.style.position = "absolute";
 	object.name = "Radio_1";
 	object.style.background = "white";
 	object.style.color = "black";
-	object.style.width ="200px";
-	object.style.height ="50px";
+	object.style.width ="15px";
+	object.style.height ="15px";
 	object.style.fontSize ="10px";
+	object.style.borderRadius ="7px";
 	object.style.fontFamily = "consolas";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
-	object.appendChild(document.createTextNode("radio"));
+	object.appendChild(document.createTextNode("Radio_1"));
 	object.style.left ="350px";
 	object.style.top ="400px";
 	object.setAttribute("type","radio");
-	object.setAttribute("value","radio");
+	object.setAttribute("value","Radio_1");
+	page.appendChild(object);
+	object = document.createElement('INPUT');
+	object.style.position = "absolute";
+	object.name = "Radio_2";
+	object.style.background = "white";
+	object.style.color = "black";
+	object.style.width ="15px";
+	object.style.height ="15px";
+	object.style.fontSize ="10px";
+	object.style.borderRadius ="7px";
+	object.style.fontFamily = "consolas";
+	object.style.textAlign      ="center";
+	object.style.verticalAlign  ="middle";
+	object.appendChild(document.createTextNode("Radio_2"));
+	object.style.left ="400px";
+	object.style.top ="400px";
+	object.setAttribute("type","radio");
+	object.setAttribute("value","Radio_2");
+	page.appendChild(object);
+	object = document.createElement('IMG');
+	object.style.position = "absolute";
+	object.name = "Image_1";
+	object.style.background = "white";
+	object.style.color = "black";
+	object.style.width ="400px";
+	object.style.height ="240px";
+	object.style.fontSize ="10px";
+	object.style.borderRadius ="7px";
+	object.style.fontFamily = "consolas";
+	object.style.textAlign      ="center";
+	object.style.verticalAlign  ="middle";
+	object.src ="test.png";
+	object.appendChild(document.createTextNode("Demo Image"));
+	object.style.left ="100px";
+	object.style.top ="500px";
+	object.setAttribute("value","Demo Image");
 	page.appendChild(object);
 	object = document.createElement('VIDEO');
 	object.style.position = "absolute";
@@ -177,10 +242,11 @@ function MAIN() {
 	object.style.width ="400px";
 	object.style.height ="240px";
 	object.style.fontSize ="10px";
+	object.style.borderRadius ="7px";
 	object.style.fontFamily = "consolas";
 	object.style.textAlign      ="center";
 	object.style.verticalAlign  ="middle";
-	object.src ="test.ogg";
+	object.src ="test.mp4";
 	object.setAttribute("controls", "controls");
 	object.appendChild(document.createTextNode("Demo Video"));
 	object.style.left ="700px";
@@ -195,6 +261,7 @@ function MAIN() {
 	object.style.width ="400px";
 	object.style.height ="240px";
 	object.style.fontSize ="14px";
+	object.style.borderRadius ="7px";
 	object.style.borderWidth = "4px";
 	object.style.borderColor = "black";
 	object.style.borderStyle = "solid";
