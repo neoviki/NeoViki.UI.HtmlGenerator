@@ -113,7 +113,10 @@ class UI_COMMON:
         self.code +="\n\tobject.style.position = \"absolute\";"
         #self.code += "\n\tobject.id = " + "\"" + str(self.id) + "\"" + ";"
         self.code += "\n\tobject.name = " + "\"" + str(self.name) + "\"" + ";"
-        self.code +="\n\tobject.style.background = \""  + self.color.bg + "\";"
+
+        if self.color.bg != None:
+            self.code +="\n\tobject.style.background = \""  + self.color.bg + "\";"
+
         self.code +="\n\tobject.style.color = \""       + self.color.fg + "\";"
         self.code +="\n\tobject.style.width ="          + "\"" + str(self.width)    + "px" + "\";"
         self.code +="\n\tobject.style.height ="         + "\"" + str(self.height)   + "px" + "\";"
@@ -338,7 +341,7 @@ class label(UI_COMMON):
         #self.code = "\n\tobject = document.createElement('LABEL');"
         #Using disabled button as label, as label text is not aligning to the middle
         self.code = "\n\tobject = document.createElement('BUTTON');"
-        self.color.bg = 'black'
+        self.color.bg = None
         self.color.fg = 'white'
 
     def gotoxy(self, x, y):
